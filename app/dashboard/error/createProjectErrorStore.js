@@ -5,11 +5,8 @@ module.exports = {
     clientName: { type: "string", minLength: 4, maxLength: 25 },
     avatarUrl: { type: "string" },
     bookmark: { type: "boolean" },
-    progressStatus: {
-      type: "string",
-      enum: ["", "In Progress", "Completed", "On Hold"],
-    },
-    priorityStatus: { type: "string", enum: ["", "Low", "Medium", "High"] },
+    progressStatus: { type: "string" },
+    priorityStatus: { type: "string" },
     projectType: {
       type: "array",
     },
@@ -17,23 +14,18 @@ module.exports = {
     frontendUrl: { type: "string" },
     backendUrl: { type: "string" },
   },
-  required: ["projectName", "clientName"],
+  required: ["projectName", "clientName", "projectType"],
   errorMessage: {
     properties: {
       projectName:
-        "Project name is required and must be at least 4 and at most 25",
+        "Project name is required and must be between 4 and 25 characters.",
       clientName:
-        "Client name is required and must be at least 4 and at most 25",
-      avatarUrl: "Avatar url is required",
-      progressStatus:
-        "Progress status must be one of In Progress, Completed, On Hold",
-      priorityStatus: "Priority status must be one of Low, Medium, High",
-      projectType: "Project type must be one of Web, Android, IOS, Backend",
-      dueDate: "Due date is required and must be a valid date",
+        "Client name is required and must be between 4 and 25 characters.",
+      projectType: "At least one project type is required.",
     },
   },
   additionalProperties: {
     not: true,
-    errorMessage: "You have provided an invalid property ${0#}",
+    errorMessage: "Invalid property: ${0#}.",
   },
 };
