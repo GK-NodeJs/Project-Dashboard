@@ -20,8 +20,8 @@ class Response {
       case "ServerError":
         res.status(statusCode.Internal_Server_Error).json({
           status: statusCode.Internal_Server_Error,
-          type: result.name,
-          errors: result.message,
+          message: result.message,
+          errors: result.error,
         });
         break;
       case "RequestValidationError":
@@ -29,6 +29,18 @@ class Response {
           status: statusCode.Bad_Request,
           type: result.name,
           errors: result.message,
+        });
+        break;
+      case "FileFetchEmpty":
+        res.status(statusCode.No_Content).json({
+          status: statusCode.No_Content,
+          message: result.message,
+        });
+      case "FileProcessError":
+        res.status(statusCode.Bad_Request).json({
+          status: statusCode.Bad_Request,
+          message: result.message,
+          errors: result.error,
         });
         break;
       default:

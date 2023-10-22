@@ -2,6 +2,7 @@ require("dotenv").config(); // load .env variables
 
 // import files
 const projectRoutes = require("./routes/dashboard/project");
+const commonRoutes = require("./routes/common/common");
 // import modules
 const mongoose = require("mongoose");
 const express = require("express");
@@ -26,6 +27,8 @@ app.use((req, res, next) => {
 
 // dashboard routes
 app.use("/api/dashboard", projectRoutes);
+// common routes
+app.use("/api/common", commonRoutes);
 
 // connect to mongodb
 mongoose
