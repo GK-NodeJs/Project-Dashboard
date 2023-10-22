@@ -43,8 +43,8 @@ class ImageKitClass {
   async fileFetch(req, res) {
     try {
       const fetchFile = await imageKit.listFiles({
-        skip: 0,
-        limit: req.body.limit || 10,
+        skip: req.body.skip || 0,
+        limit: req.body.pageLimit || 10,
         path: req.body.path || "",
         type: req.body.type || "",
         tags: req.body.tags || [],

@@ -42,13 +42,9 @@ module.exports.ValidateRequest = function (validationObj) {
     const validation = ajv.compile(validationObj);
     const validate = validation(req.body);
     if (!validate) {
-      console.log("validation", validation);
       return Response.render(res, {
         name: "RequestValidationError",
-        message:
-          validation.errors[0].instancePath +
-          " " +
-          validation.errors[0].message,
+        message: validation.errors[0].message,
       });
     }
     next();
