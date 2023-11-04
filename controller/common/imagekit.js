@@ -40,36 +40,30 @@ class ImageKitClass {
     }
   }
 
-  async fileFetch(req, res) {
-    try {
-      const fetchFile = await imageKit.listFiles({
+  fileFetch(req, res) {
+    imageKit
+      .listFiles({
         skip: req.body.skip || 0,
         limit: req.body.pageLimit || 10,
         path: req.body.path || "",
         type: req.body.type || "",
         tags: req.body.tags || [],
         searchQuery: req.body.searchQuery || "",
-      });
-
-      if (!fetchFile || isEmpty(fetchFile)) {
-        return Response.render(res, {
-          name: "FileFetchEmpty",
-          message: "Files not fetched",
+      })
+      .catch((error) => {
+        Response.render(res, {
+          name: "FileProcessError",
+          message: "File fetch failed",
+          error: error,
         });
-      }
-
-      Response.render(res, {
-        name: "Success",
-        message: "Files fetched successfully",
-        data: fetchFile,
+      })
+      .then((result) => {
+        Response.render(res, {
+          name: "Success",
+          message: "Files fetched successfully",
+          data: result,
+        });
       });
-    } catch (error) {
-      Response.render(res, {
-        name: "FileProcessError",
-        message: "File fetch failed",
-        error: error,
-      });
-    }
   }
 
   async fileDelete(req, res) {
