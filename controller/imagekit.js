@@ -1,6 +1,6 @@
 const ImageKit = require("imagekit");
 const { isEmpty } = require("lodash");
-const Response = require("../../middleware/response");
+const Response = require("../middleware/response");
 
 const imageKit = new ImageKit({
   publicKey: process.env.PUBLIC_KEY,

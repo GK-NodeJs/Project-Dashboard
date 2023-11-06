@@ -1,6 +1,6 @@
 const { isEmpty } = require("lodash");
-const Project = require("../../modules/dashboard/project");
-const Response = require("../../middleware/response");
+const Project = require("../modules/project");
+const Response = require("../middleware/response");
 
 class ProjectClass {
   async getAllProjects() {
