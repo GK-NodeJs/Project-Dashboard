@@ -138,6 +138,13 @@ module.exports = {
           },
         },
       },
+      minItems: 1,
+      uniqueItems: true,
+      errorMessage: {
+        type: "Portfolio menus must be an array of objects.",
+        minItems: "Portfolio menus must have at least one item.",
+        uniqueItems: "Portfolio menus must not have duplicate items.",
+      },
     },
   },
   errorMessage: {
