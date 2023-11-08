@@ -48,7 +48,7 @@ class Response {
           status: statusCode.Internal_Server_Error,
           message: "Internal server error",
           error: {
-            message: "oops something went wrong",
+            message: result.message || "oops something went wrong",
           },
         });
     }
