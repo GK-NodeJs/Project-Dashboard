@@ -58,16 +58,10 @@ module.exports = {
         "backgroundImageURL",
         "resumeFileURL",
       ],
-      errorMessage: {
-        properties: {
-          profileName: "Profile name is required.",
-          gitHubUsername: "GitHub username is required.",
-          profileImageURL: "Profile image URL is required.",
-          backgroundImageURL: "Background image URL is required.",
-          resumeFileURL: "Resume file URL is required.",
-        },
+      additionalProperties: {
+        not: true,
+        errorMessage: "Invalid property: ${0#}.",
       },
-      additionalProperties: false,
     },
     portfolioMenus: {
       type: "array",
@@ -102,23 +96,23 @@ module.exports = {
                 },
                 link: {
                   type: "string",
+                  minLength: 1,
                   errorMessage: {
                     type: "Sub menu link must be a string",
+                    minLength: "Sub menu link must be at least 1 characters.",
                   },
                 },
                 iconName: {
                   type: "string",
-                  errorMessage: { type: "Sub menu icon name must be a string" },
+                  minLength: 2,
+                  errorMessage: {
+                    type: "Sub menu icon name must be a string",
+                    minLength:
+                      "Sub menu icon name must be at least 2 characters.",
+                  },
                 },
               },
               required: ["name", "link", "iconName"],
-              errorMessage: {
-                properties: {
-                  name: "Sub menu name is required.",
-                  link: "Sub menu link is required.",
-                  iconName: "Sub menu icon name is required.",
-                },
-              },
               additionalProperties: false,
             },
             minItems: 1,
@@ -131,12 +125,6 @@ module.exports = {
           },
         },
         required: ["menuType", "subMenus"],
-        errorMessage: {
-          properties: {
-            menuType: "Menu type is required.",
-            subMenus: "Sub menus are required.",
-          },
-        },
       },
       minItems: 1,
       uniqueItems: true,
@@ -148,6 +136,7 @@ module.exports = {
     },
   },
   errorMessage: {
+    type: "Portfolio must be an object.",
     minProperties:
       "At least one property is required from the following: 'portfolioHeader', 'portfolioMenus', to update your portfolio.",
   },
