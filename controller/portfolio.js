@@ -32,6 +32,26 @@ class PortfolioClass {
       Response.render(res, error);
     }
   }
+
+  async getPortfolioProcess(req, res) {
+    try {
+      let getPortfolioData = await Portfolio.findOne({});
+      if (getPortfolioData && getPortfolioData._id) {
+        Response.render(res, {
+          name: "Success",
+          message: "Portfolio get successfully",
+          data: getPortfolioData,
+        });
+      } else {
+        Response.render(res, {
+          name: "Success",
+          message: "Portfolio not found",
+        });
+      }
+    } catch (error) {
+      Response.render(res, error);
+    }
+  }
 }
 
 module.exports = new PortfolioClass();

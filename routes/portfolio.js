@@ -11,4 +11,9 @@ router.post(
   require("../controller/portfolio").updatePortfolioProcess
 );
 
+router.get(
+  "/getPortfolio",
+  require("../controller/portfolio").getPortfolioProcess
+);
+
 module.exports = router;
