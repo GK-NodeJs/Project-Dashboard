@@ -9,35 +9,28 @@ const imageKit = new ImageKit({
 });
 
 class ImageKitClass {
-  async fileUpload(req, res) {
-    try {
-      const uploadFile = await imageKit.upload({
+  fileUpload(req, res) {
+    imageKit
+      .upload({
         file: req.file.buffer.toString("base64"),
         fileName: req.file.originalname,
         folder: req.body.folder || "",
         useUniqueFileName: true,
-      });
-
-      if (!uploadFile || isEmpty(uploadFile)) {
-        console.log("uploadFile", uploadFile);
-        return Response.render(res, {
-          name: "FileFetchEmpty",
-          message: "File not uploaded",
+      })
+      .catch((error) => {
+        Response.render(res, {
+          name: "FileProcessError",
+          message: "File upload failed",
+          error: error,
         });
-      }
-
-      Response.render(res, {
-        name: "Success",
-        message: "File uploaded successfully",
-        data: uploadFile,
+      })
+      .then((result) => {
+        Response.render(res, {
+          name: "Success",
+          message: "Files upload successfully",
+          data: result,
+        });
       });
-    } catch (error) {
-      Response.render(res, {
-        name: "FileProcessError",
-        message: "File upload failed",
-        error: error,
-      });
-    }
   }
 
   fileFetch(req, res) {
@@ -110,44 +103,43 @@ class ImageKitClass {
     }
   }
 
-  async createFolder(req, res) {
-    try {
-      const createFolderData = await imageKit.createFolder({
+  createFolder(req, res) {
+    imageKit
+      .createFolder({
         folderName: req.body.folderName,
         parentFolderPath: req.body.parentFolderPath || "/",
-      });
-      if (!createFolderData || isEmpty(createFolderData)) {
-        return Response.render(res, {
+      })
+      .catch((error) => {
+        Response.render(res, {
+          name: "FileProcessError",
+          message: "Folder creation failed",
+          error: error,
+        });
+      })
+      .then((result) => {
+        Response.render(res, {
           name: "Success",
           message: "Folder created successfully",
         });
-      }
-    } catch (error) {
-      Response.render(res, {
-        name: error.name || "FileProcessError",
-        message: error.message || "Folder creation failed",
-        error: error,
       });
-    }
   }
 
-  async deleteFolder(req, res) {
-    try {
-      const deleteFolderData = await imageKit.deleteFolder(req.body.folderPath);
-
-      if (!deleteFolderData || isEmpty(deleteFolderData)) {
-        return Response.render(res, {
+  deleteFolder(req, res) {
+    imageKit
+      .deleteFolder(req.body.folderPath)
+      .catch((error) => {
+        Response.render(res, {
+          name: "FileProcessError",
+          message: "Folder deletion failed",
+          error: error,
+        });
+      })
+      .then((result) => {
+        Response.render(res, {
           name: "Success",
           message: "Folder deleted successfully",
         });
-      }
-    } catch (error) {
-      Response.render(res, {
-        name: "FileProcessError",
-        message: "Folder deletion failed",
-        error: error,
       });
-    }
   }
 }
 
