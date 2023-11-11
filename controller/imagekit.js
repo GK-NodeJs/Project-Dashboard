@@ -42,7 +42,7 @@ class ImageKitClass {
         type: req.body.type || "",
         tags: req.body.tags || [],
         searchQuery: req.body.searchQuery || "",
-        sort: "DESC_UPDATED",
+        sort: req.body.sort || "",
       })
       .catch((error) => {
         Response.render(res, {
