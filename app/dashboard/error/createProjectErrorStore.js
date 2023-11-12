@@ -88,6 +88,7 @@ module.exports = {
       },
     },
   },
+  required: ["projectName", "clientName", "projectType"],
   additionalProperties: {
     not: true,
     errorMessage: "Invalid property: ${0#}.",
