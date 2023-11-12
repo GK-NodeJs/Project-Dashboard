@@ -38,6 +38,10 @@ const projectSchema = new Schema(
       type: String,
       required: [true, "Due date is required"],
     },
+    projectRoute: {
+      type: String,
+      trim: true,
+    },
     frontendUrl: {
       type: String,
       trim: true,
