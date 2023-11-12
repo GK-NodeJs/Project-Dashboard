@@ -51,10 +51,10 @@ module.exports = {
       uniqueItems: true,
       items: {
         type: "string",
-        enum: ["Web", "Android", "IOS", "Backend"],
+        enum: ["web", "android", "ios", "backend"],
         errorMessage: {
           type: "Project type must be a string.",
-          enum: "Project type must be one of the following: Web, Android, IOS, Backend.",
+          enum: "Project type must be one of the following: web, android, ios, backend.",
         },
       },
       errorMessage: {
