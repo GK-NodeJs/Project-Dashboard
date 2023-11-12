@@ -1,7 +1,7 @@
 module.exports = {
   type: "object",
   properties: {
-    folder: { type: "string", minLength: 1, maxLength: 15 },
+    folder: { type: "string", minLength: 1 },
   },
   errorMessage: {
     properties: {
