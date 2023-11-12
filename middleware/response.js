@@ -21,7 +21,7 @@ class Response {
         res.status(statusCode.Internal_Server_Error).json({
           status: statusCode.Internal_Server_Error,
           message: result.message,
-          errors: result.error,
+          errors: result?.error?.message ?? result.error,
         });
         break;
       case "RequestValidationError":
