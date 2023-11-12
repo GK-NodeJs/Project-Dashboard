@@ -1,5 +1,4 @@
 const ImageKit = require("imagekit");
-const { isEmpty } = require("lodash");
 const Response = require("../middleware/response");
 
 const imageKit = new ImageKit({
@@ -60,48 +59,40 @@ class ImageKitClass {
       });
   }
 
-  async fileDelete(req, res) {
-    try {
-      const deleteFile = await imageKit.deleteFile(req.body.fileId);
-
-      if (!deleteFile || isEmpty(deleteFile)) {
-        return Response.render(res, {
+  fileDelete(req, res) {
+    imageKit
+      .deleteFile(req.body.fileId)
+      .catch((error) => {
+        Response.render(res, {
+          name: "FileProcessError",
+          message: "File deletion failed",
+          error: error,
+        });
+      })
+      .then((result) => {
+        Response.render(res, {
           name: "Success",
           message: "File deleted successfully",
         });
-      }
-    } catch (error) {
-      Response.render(res, {
-        name: "FileProcessError",
-        message: "File deletion failed",
-        error: error,
       });
-    }
   }
 
-  async fileDeleteBulk(req, res) {
-    try {
-      const deleteFile = await imageKit.bulkDeleteFiles(req.body.fileIds);
-
-      console.log("fileDeleteBulk", deleteFile);
-      if (!deleteFile || isEmpty(deleteFile)) {
-        return Response.render(res, {
-          name: "FileFetchEmpty",
-          message: "Files not deleted",
+  fileDeleteBulk(req, res) {
+    imageKit
+      .bulkDeleteFiles(req.body.fileIds)
+      .catch((error) => {
+        Response.render(res, {
+          name: "FileProcessError",
+          message: "Bulk file deletion failed",
+          error: error,
         });
-      }
-
-      Response.render(res, {
-        name: "Success",
-        message: "Files deleted successfully",
+      })
+      .then((result) => {
+        Response.render(res, {
+          name: "Success",
+          message: "Files deleted successfully",
+        });
       });
-    } catch (error) {
-      Response.render(res, {
-        name: "FileProcessError",
-        message: "Bulk file deletion failed",
-        error: error,
-      });
-    }
   }
 
   createFolder(req, res) {
