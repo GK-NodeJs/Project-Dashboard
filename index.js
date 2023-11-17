@@ -1,7 +1,7 @@
 require("dotenv").config(); // load .env variables
 
 // import files
-const projectRoutes = require("./routes/project");
+const projectsRoutes = require("./routes/projects");
 const imageKitRoutes = require("./routes/imageKit");
 const portfolioRoutes = require("./routes/portfolio");
 const taskRoutes = require("./routes/task");
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 // dashboard routes
-app.use("/api/dashboard", projectRoutes);
+app.use("/api/projects", projectsRoutes);
 // common routes
 app.use("/api/imageKit", imageKitRoutes);
 // portfolio routes

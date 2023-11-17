@@ -7,25 +7,25 @@ const updateProjectErrorStore = require("../app/dashboard/error/updateProjectErr
 
 router.get(
   "/getAllProjects",
-  require("../controller/project").getAllProjectProcess
+  require("../controller/projects").getAllProjectProcess
 );
 
 router.post(
   "/createProject",
   ValidateRequest(createProjectErrorStore),
-  require("../controller/project").createProjectProcess
+  require("../controller/projects").createProjectProcess
 );
 
 router.post(
   "/updateProject",
   ValidateRequest(updateProjectErrorStore),
-  require("../controller/project").updateProjectProcess
+  require("../controller/projects").updateProjectProcess
 );
 
 router.post(
   "/deleteProject",
   ValidateRequest(_idErrorStore),
-  require("../controller/project").deleteProjectProcess
+  require("../controller/projects").deleteProjectProcess
 );
 
 module.exports = router;
