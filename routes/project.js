@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { ValidateRequest } = require("../middleware/ajvValidator");
+const _idErrorStore = require("../app/common/error/_idErrorStore");
 const createProjectErrorStore = require("../app/dashboard/error/createProjectErrorStore");
 const updateProjectErrorStore = require("../app/dashboard/error/updateProjectErrorStore");
 
@@ -23,6 +24,7 @@ router.post(
 
 router.post(
   "/deleteProject",
+  ValidateRequest(_idErrorStore),
   require("../controller/project").deleteProjectProcess
 );
 
