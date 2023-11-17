@@ -4,7 +4,7 @@ require("dotenv").config(); // load .env variables
 const projectsRoutes = require("./routes/projects");
 const imageKitRoutes = require("./routes/imageKit");
 const portfolioRoutes = require("./routes/portfolio");
-const taskRoutes = require("./routes/task");
+const notesRoutes = require("./routes/notes");
 // import modules
 const mongoose = require("mongoose");
 const express = require("express");
@@ -33,8 +33,8 @@ app.use("/api/projects", projectsRoutes);
 app.use("/api/imageKit", imageKitRoutes);
 // portfolio routes
 app.use("/api/portfolio", portfolioRoutes);
-// task routes
-app.use("/api/task", taskRoutes);
+// notes routes
+app.use("/api/notes", notesRoutes);
 
 // connect to mongodb
 mongoose
