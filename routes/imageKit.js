@@ -8,12 +8,12 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // Import the error store for the request body
-const fileUploadErrorStore = require("../app/common/error/fileUploadErrorStore");
-const fileFetchErrorStore = require("../app/common/error/fileFetchErrorStore");
-const fileDeleteErrorStore = require("../app/common/error/fileDeleteErrorStore");
-const fileDeleteBulkErrorStore = require("../app/common/error/fileDeleteBulkErrorStore");
-const createFolderErrorStore = require("../app/common/error/createFolderErrorStore");
-const deleteFolderErrorStore = require("../app/common/error/deleteFolderErrorStore");
+const fileUploadErrorStore = require("../app/imageKit/error/fileUploadErrorStore");
+const fileFetchErrorStore = require("../app/imageKit/error/fileFetchErrorStore");
+const fileDeleteErrorStore = require("../app/imageKit/error/fileDeleteErrorStore");
+const fileDeleteBulkErrorStore = require("../app/imageKit/error/fileDeleteBulkErrorStore");
+const createFolderErrorStore = require("../app/imageKit/error/createFolderErrorStore");
+const deleteFolderErrorStore = require("../app/imageKit/error/deleteFolderErrorStore");
 
 router.post(
   "/fileUpload",
