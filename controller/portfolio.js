@@ -1,12 +1,12 @@
-const Portfolio = require("../modules/portfolio");
+const PortfolioSchema = require("../modules/portfolio");
 const Response = require("../middleware/response");
 
 class PortfolioClass {
   async updatePortfolioProcess(req, res) {
     try {
-      let checkPortfolioData = await Portfolio.findOne({});
+      let checkPortfolioData = await PortfolioSchema.findOne({});
       if (checkPortfolioData && checkPortfolioData._id) {
-        let updatePortfolioData = await Portfolio.findByIdAndUpdate(
+        let updatePortfolioData = await PortfolioSchema.findByIdAndUpdate(
           checkPortfolioData._id,
           {
             $set: req.body,
@@ -21,7 +21,7 @@ class PortfolioClass {
           data: updatePortfolioData,
         });
       } else {
-        let createPortfolio = await Portfolio.create(req.body);
+        let createPortfolio = await PortfolioSchema.create(req.body);
         Response.render(res, {
           name: "Success",
           message: "Portfolio created successfully",
@@ -35,7 +35,7 @@ class PortfolioClass {
 
   async getPortfolioProcess(req, res) {
     try {
-      let getPortfolioData = await Portfolio.findOne({});
+      let getPortfolioData = await PortfolioSchema.findOne({});
       if (getPortfolioData && getPortfolioData._id) {
         Response.render(res, {
           name: "Success",

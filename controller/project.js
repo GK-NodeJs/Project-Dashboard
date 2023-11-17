@@ -1,16 +1,20 @@
-const { isEmpty } = require("lodash");
-const Project = require("../modules/project");
+const ProjectSchema = require("../modules/projects");
 const Response = require("../middleware/response");
+const { isEmpty } = require("lodash");
 
 class ProjectClass {
   async getAllProjects() {
     try {
-      const getProject = await Project.find({});
+      const getProject = await ProjectSchema.find({});
       const message =
         getProject && !isEmpty(getProject)
           ? "Projects fetched successfully"
           : "Projects not found";
-      return { name: "Success", message, data: getProject || undefined };
+      return {
+        name: "Success",
+        message,
+        data: getProject && !isEmpty(getProject) ? getProject : undefined,
+      };
     } catch (error) {
       throw {
         name: "ServerError",
@@ -30,7 +34,7 @@ class ProjectClass {
 
   async createProject(reqData) {
     try {
-      const projectData = await Project.create(reqData);
+      const projectData = await ProjectSchema.create(reqData);
       if (!projectData || isEmpty(projectData))
         throw {
           name: "ServerError",
@@ -70,7 +74,7 @@ class ProjectClass {
         frontendUrl: reqData.frontendUrl,
         backendUrl: reqData.backendUrl,
       };
-      const projectData = await Project.findByIdAndUpdate(
+      const projectData = await ProjectSchema.findByIdAndUpdate(
         reqData._id,
         { $set: projectReqData },
         { new: true }
@@ -103,7 +107,7 @@ class ProjectClass {
 
   async deleteProject(reqData) {
     try {
-      const projectData = await Project.findByIdAndDelete(reqData._id);
+      const projectData = await ProjectSchema.findByIdAndDelete(reqData._id);
       if (!projectData || isEmpty(projectData)) {
         throw {
           name: "Success",
