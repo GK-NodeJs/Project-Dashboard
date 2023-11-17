@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { ValidateRequest } = require("../middleware/ajvValidator");
-const _idErrorStore = require("../app/common/error/_idErrorStore");
-const noteProcessErrorStore = require("../app/task/error/noteProcessErrorStore");
+const _idErrorStore = require("../app/errors/common/_idErrorStore");
+const noteProcessErrorStore = require("../app/errors/task/noteProcessErrorStore");
 
 router.get("/getAllNotes", require("../controller/notes").getAllNotesProcess);
 

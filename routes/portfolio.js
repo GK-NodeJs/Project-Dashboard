@@ -3,7 +3,7 @@ const router = express.Router();
 const { ValidateRequest } = require("../middleware/ajvValidator");
 
 // Import the error store for the request body
-const updatePortfolioErrorStore = require("../app/portfolio/error/updatePortfolioErrorStore");
+const updatePortfolioErrorStore = require("../app/errors/portfolio/updatePortfolioErrorStore");
 
 router.get(
   "/getPortfolio",

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { ValidateRequest } = require("../middleware/ajvValidator");
-const _idErrorStore = require("../app/common/error/_idErrorStore");
-const createProjectErrorStore = require("../app/dashboard/error/createProjectErrorStore");
-const updateProjectErrorStore = require("../app/dashboard/error/updateProjectErrorStore");
+const _idErrorStore = require("../app/errors/common/_idErrorStore");
+const createProjectErrorStore = require("../app/errors/dashboard/createProjectErrorStore");
+const updateProjectErrorStore = require("../app/errors/dashboard/updateProjectErrorStore");
 
 router.get(
   "/getAllProjects",
