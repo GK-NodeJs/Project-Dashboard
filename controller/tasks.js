@@ -1,4 +1,5 @@
 const TagsSchema = require("../modules/tags");
+const ListsSchema = require("../modules/lists");
 const Response = require("../middleware/response");
 const { isEmpty } = require("lodash");
 
@@ -111,6 +112,124 @@ class TaskClass {
   async deleteTagProcess(req, res) {
     try {
       const response = await new TaskClass().deleteTag(req.body);
+      Response.render(res, response);
+    } catch (error) {
+      Response.render(res, error);
+    }
+  }
+
+  async getAllList() {
+    try {
+      const listData = await ListsSchema.find({});
+      const message =
+        listData && !isEmpty(listData)
+          ? "Lists fetched successfully"
+          : "Lists not found";
+      return {
+        name: "Success",
+        message,
+        data: listData && !isEmpty(listData) ? listData : undefined,
+      };
+    } catch (error) {
+      throw { name: "ServerError", message: "Something went wrong" };
+    }
+  }
+
+  async getAllListProcess(req, res) {
+    try {
+      const response = await new TaskClass().getAllList();
+      Response.render(res, response);
+    } catch (error) {
+      Response.render(res, error);
+    }
+  }
+
+  async createList(reqData) {
+    try {
+      const listData = await ListsSchema.create(reqData);
+      if (!listData || isEmpty(listData))
+        throw {
+          name: "ServerError",
+          message: "Something went wrong while creating a list",
+        };
+      return {
+        name: "Success",
+        message: "List created successfully",
+        data: listData,
+      };
+    } catch (error) {
+      throw { name: "ServerError", message: "Something went wrong" };
+    }
+  }
+
+  async createListProcess(req, res) {
+    try {
+      const response = await new TaskClass().createList(req.body);
+      Response.render(res, response);
+    } catch (error) {
+      Response.render(res, error);
+    }
+  }
+
+  async updateList() {
+    try {
+      const setData = {
+        name: reqData.name,
+        color: reqData.color,
+      };
+      const listData = await ListsSchema.findOneAndUpdate(
+        { _id: reqData._id },
+        { $set: setData },
+        { new: true }
+      );
+      if (!listData || isEmpty(listData)) {
+        throw {
+          name: "ServerError",
+          message: "Something went wrong while updating a list",
+        };
+      }
+      return {
+        name: "Success",
+        message: "List updated successfully",
+        data: listData,
+      };
+    } catch (error) {
+      throw { name: "ServerError", message: "Something went wrong" };
+    }
+  }
+
+  async updateListProcess(req, res) {
+    try {
+      const response = await new TaskClass().updateList(req.body);
+      Response.render(res, response);
+    } catch (error) {
+      Response.render(res, error);
+    }
+  }
+
+  async deleteList() {
+    try {
+      const listData = await ListsSchema.findOneAndDelete({
+        _id: reqData._id,
+      });
+      if (!listData || isEmpty(listData)) {
+        throw {
+          name: "ServerError",
+          message: "Something went wrong while deleting a list",
+        };
+      }
+      return {
+        name: "Success",
+        message: "List deleted successfully",
+      };
+    } catch (error) {
+      throw { name: "ServerError", message: "Something went wrong" };
+    }
+  }
+
+  async deleteListProcess(req, res) {
+    try {
+      const response = await new TaskClass().deleteList(req.body);
       Response.render(res, response);
     } catch (error) {
       Response.render(res, error);
