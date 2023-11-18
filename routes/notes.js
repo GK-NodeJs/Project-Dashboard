@@ -2,14 +2,21 @@ const express = require("express");
 const router = express.Router();
 const { ValidateRequest } = require("../middleware/ajvValidator");
 const _idErrorStore = require("../app/errors/common/_idErrorStore");
-const noteProcessErrorStore = require("../app/errors/task/noteProcessErrorStore");
+const createNoteErrorStore = require("../app/errors/task/createNoteErrorStore");
+const updateNoteErrorStore = require("../app/errors/task/updateNoteErrorStore");
 
 router.get("/getAllNotes", require("../controller/notes").getAllNotesProcess);
 
 router.post(
-  "/notesUpdate",
-  ValidateRequest(noteProcessErrorStore),
-  require("../controller/notes").notesUpdateProcess
+  "/createNote",
+  ValidateRequest(createNoteErrorStore),
+  require("../controller/notes").createNoteProcess
+);
+
+router.post(
+  "/updateNote",
+  ValidateRequest(updateNoteErrorStore),
+  require("../controller/notes").updateNoteProcess
 );
 
 router.post(

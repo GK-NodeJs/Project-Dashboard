@@ -32,53 +32,65 @@ class NoteClass {
     }
   }
 
-  async notesUpdate(reqData) {
+  async createNote(reqData) {
+    try {
+      const notesData = await NoteSchema.create(reqData);
+      if (!notesData || isEmpty(notesData))
+        throw {
+          name: "ServerError",
+          message: "Something went wrong while creating a notes",
+        };
+      return {
+        name: "Success",
+        message: "Notes created successfully",
+        data: notesData,
+      };
+    } catch (error) {
+      throw { name: "ServerError", message: "Something went wrong" };
+    }
+  }
+
+  async createNoteProcess(req, res) {
+    try {
+      const response = await new NoteClass().createNote(req.body);
+      Response.render(res, response);
+    } catch (error) {
+      Response.render(res, error);
+    }
+  }
+
+  async updateNote(reqData) {
     try {
       const noteData = {
         title: reqData.title,
         description: reqData.description,
         pinned: reqData.pinned,
       };
-      let notesData;
-      if (reqData._id) {
-        notesData = await NoteSchema.findOneAndUpdate(
-          { _id: reqData._id },
-          { $set: noteData },
-          { new: true }
-        );
-        if (!notesData || isEmpty(notesData)) {
-          throw {
-            name: "ServerError",
-            message: "Something went wrong while updating a note",
-          };
-        }
-
-        return {
-          name: "Success",
-          message: "Note updated successfully",
-          data: notesData,
-        };
-      } else {
-        notesData = await NoteSchema.create(reqData);
-        if (!notesData || isEmpty(notesData))
-          throw {
-            name: "ServerError",
-            message: "Something went wrong while creating a notes",
-          };
-        return {
-          name: "Success",
-          message: "Notes created successfully",
-          data: notesData,
+      const notesData = await NoteSchema.findOneAndUpdate(
+        { _id: reqData._id },
+        { $set: noteData },
+        { new: true }
+      );
+      if (!notesData || isEmpty(notesData)) {
+        throw {
+          name: "ServerError",
+          message: "Something went wrong while updating a note",
         };
       }
+
+      return {
+        name: "Success",
+        message: "Note updated successfully",
+        data: notesData,
+      };
     } catch (error) {
       throw { name: "ServerError", message: "Something went wrong" };
     }
   }
 
-  async notesUpdateProcess(req, res) {
+  async updateNoteProcess(req, res) {
     try {
-      const response = await new NoteClass().notesUpdate(req.body);
+      const response = await new NoteClass().updateNote(req.body);
       Response.render(res, response);
     } catch (error) {
       Response.render(res, error);
