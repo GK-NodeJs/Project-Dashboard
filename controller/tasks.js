@@ -56,6 +56,38 @@ class TaskClass {
     }
   }
 
+  async updateTag(reqData) {
+    try {
+      const tagData = await TagsSchema.findOneAndUpdate(
+        { _id: reqData._id },
+        { name: reqData.name },
+        { new: true }
+      );
+      if (!tagData || isEmpty(tagData)) {
+        throw {
+          name: "ServerError",
+          message: "Something went wrong while updating a tag",
+        };
+      }
+      return {
+        name: "Success",
+        message: "Tag updated successfully",
+        data: tagData,
+      };
+    } catch (error) {
+      throw { name: "ServerError", message: "Something went wrong" };
+    }
+  }
+
+  async updateTagProcess(req, res) {
+    try {
+      const response = await new TaskClass().updateTag(req.body);
+      Response.render(res, response);
+    } catch (error) {
+      Response.render(res, error);
+    }
+  }
+
   async deleteTag(reqData) {
     try {
       const tagData = await TagsSchema.findOneAndDelete({
