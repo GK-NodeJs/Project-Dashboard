@@ -111,7 +111,6 @@ class NoteClass {
       return {
         name: "Success",
         message: "Note deleted successfully",
-        data: noteData,
       };
     } catch (error) {
       throw { name: "ServerError", message: "Something went wrong" };

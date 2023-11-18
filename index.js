@@ -5,6 +5,7 @@ const projectsRoutes = require("./routes/projects");
 const imageKitRoutes = require("./routes/imageKit");
 const portfolioRoutes = require("./routes/portfolio");
 const notesRoutes = require("./routes/notes");
+const tasksRoutes = require("./routes/tasks");
 // import modules
 const mongoose = require("mongoose");
 const express = require("express");
@@ -35,6 +36,8 @@ app.use("/api/imageKit", imageKitRoutes);
 app.use("/api/portfolio", portfolioRoutes);
 // notes routes
 app.use("/api/notes", notesRoutes);
+// task routes
+app.use("/api/tasks", tasksRoutes);
 
 // connect to mongodb
 mongoose
