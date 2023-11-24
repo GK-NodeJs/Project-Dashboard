@@ -11,8 +11,8 @@ module.exports = {
           maxLength: 25,
           errorMessage: {
             type: "Profile name must be a string.",
-            minLength: "Profile name must be between 4 and 25 characters.",
-            maxLength: "Profile name must be between 4 and 25 characters.",
+            minLength: "Profile name must be at least 4 characters.",
+            maxLength: "Profile name must be at most 25 characters.",
           },
         },
         gitHubUsername: {
@@ -21,33 +21,32 @@ module.exports = {
           maxLength: 25,
           errorMessage: {
             type: "GitHub username name must be a string.",
-            minLength: "GitHub username must be between 4 and 25 characters.",
-            maxLength: "GitHub username must be between 4 and 25 characters.",
+            minLength: "GitHub username must at least 4 characters.",
+            maxLength: "GitHub username must at most 25 characters.",
           },
         },
         profileImageURL: {
           type: "string",
-          minLength: 15,
+          minLength: 10,
           errorMessage: {
             type: "Profile image URL name must be a string.",
-            minLength: "Profile image URL must be greater than 15 characters.",
+            minLength: "Profile image URL must be at least 10 characters.",
           },
         },
         backgroundImageURL: {
           type: "string",
-          minLength: 15,
+          minLength: 10,
           errorMessage: {
             type: "Background image URL must be a string.",
-            minLength:
-              "Background image URL must be greater than 15 characters.",
+            minLength: "Background image URL must be at least 10 characters.",
           },
         },
         resumeFileURL: {
           type: "string",
-          minLength: 15,
+          minLength: 10,
           errorMessage: {
             type: "Resume file URL must be a string.",
-            minLength: "Resume file URL must be greater than 15 characters.",
+            minLength: "Resume file URL must be at least 10 characters.",
           },
         },
       },
@@ -88,22 +87,20 @@ module.exports = {
               properties: {
                 name: {
                   type: "string",
-                  minLength: 4,
+                  minLength: 2,
                   maxLength: 15,
                   errorMessage: {
                     type: "Sub menu name must be a string",
-                    minLength:
-                      "Sub menu name must be between 4 and 25 characters.",
-                    maxLength:
-                      "Sub menu name must be between 4 and 25 characters.",
+                    minLength: "Sub menu name must be at least 2 characters.",
+                    maxLength: "Sub menu name must be at most 15 characters.",
                   },
                 },
                 link: {
                   type: "string",
-                  minLength: 1,
+                  minLength: 2,
                   errorMessage: {
                     type: "Sub menu link must be a string",
-                    minLength: "Sub menu link must be at least 1 characters.",
+                    minLength: "Sub menu link must be at least 2 characters.",
                   },
                 },
                 iconName: {
@@ -150,60 +147,38 @@ module.exports = {
         properties: {
           name: {
             type: "string",
-            minLength: 4,
+            minLength: 2,
             maxLength: 25,
             errorMessage: {
               type: "Project name must be a string",
-              minLength: "Project name must be between 4 and 25 characters.",
-              maxLength: "Project name must be between 4 and 25 characters.",
+              minLength: "Project name must be at least 2 characters.",
+              maxLength: "Project name must be at most 25 characters.",
             },
           },
           imageURL: {
             type: "string",
-            minLength: 15,
+            minLength: 10,
             errorMessage: {
               type: "Project image URL must be a string",
-              minLength: "Project image URL must be at least 15 characters.",
+              minLength: "Project image URL must be at least 10 characters.",
             },
           },
           usedTech: {
-            type: "array",
-            minItems: 1,
-            uniqueItems: true,
-            items: {
-              type: "string",
-              minLength: 2,
-              maxLength: 25,
-              errorMessage: {
-                type: "Used technology name must be a string",
-                minLength:
-                  "Used technology name must be at least 2 characters.",
-                maxLength:
-                  "Used technology name must be at most 25 characters.",
-              },
-            },
+            type: "string",
+            minLength: 4,
+            maxLength: 150,
             errorMessage: {
-              type: "Used technologies must be an array of strings.",
-              minItems: "Used technologies must have at least one item.",
-              uniqueItems: "Used technologies must not have duplicate items.",
+              type: "Used technology name must be a string",
+              minLength: "Used technology name must be at least 4 characters.",
+              maxLength: "Used technology name must be at most 150 characters.",
             },
           },
           description: {
-            type: "array",
-            minItems: 1,
-            uniqueItems: true,
-            items: {
-              type: "string",
-              maxLength: 200,
-              errorMessage: {
-                type: "Description must be a string",
-                maxLength: "Description must be at most 200 characters.",
-              },
-            },
+            type: "string",
+            maxLength: 200,
             errorMessage: {
-              type: "Description must be an array of strings.",
-              minItems: "Description must have at least one item.",
-              uniqueItems: "Description must not have duplicate items.",
+              type: "Description must be a string",
+              maxLength: "Description must be at most 200 characters.",
             },
           },
           link: {
@@ -268,13 +243,13 @@ module.exports = {
                 secondaryTechName: {
                   type: "string",
                   minLength: 2,
-                  maxLength: 15,
+                  maxLength: 25,
                   errorMessage: {
                     type: "Secondary tech name must be a string",
                     minLength:
                       "Secondary tech name must at least 2 characters.",
                     maxLength:
-                      "Secondary tech name must at most 15 characters.",
+                      "Secondary tech name must at most 25 characters.",
                   },
                 },
                 secondaryTechIcon: {
