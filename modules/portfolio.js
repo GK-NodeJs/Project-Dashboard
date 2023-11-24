@@ -57,7 +57,7 @@ const mainMenuSchema = new Schema({
   menuType: {
     type: String,
     trim: true,
-    enum: ["Projects", "Social", "Main"],
+    enum: ["projects", "social", "main"],
     default: "Main",
     required: [true, "Menu type is required"],
   },
@@ -136,7 +136,7 @@ const skillsSchema = new Schema({
   skillType: {
     type: String,
     trim: true,
-    enum: ["Frontend", "Backend", "Database", "DevOps", "Other"],
+    enum: ["frontend", "backend", "database", "dev-ops", "other"],
     default: "Other",
     required: [true, "Skill type is required"],
   },

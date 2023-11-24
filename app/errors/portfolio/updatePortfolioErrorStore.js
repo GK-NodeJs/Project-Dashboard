@@ -71,11 +71,11 @@ module.exports = {
         properties: {
           menuType: {
             type: "string",
-            enum: ["Projects", "Social", "Main"],
+            enum: ["projects", "social", "main"],
             default: "Main",
             errorMessage: {
               type: "Menu type must be a string.",
-              enum: "Menu type must be Projects, Social, or Main.",
+              enum: "Menu type must be projects, social, or main.",
             },
           },
           subMenus: {
@@ -209,10 +209,10 @@ module.exports = {
         properties: {
           skillType: {
             type: "string",
-            enum: ["Frontend", "Backend", "Database", "DevOps", "Other"],
+            enum: ["frontend", "backend", "database", "dev-ops", "other"],
             errorMessage: {
               type: "Skill type must be a string.",
-              enum: "Skill type must be Frontend, Backend, Database, DevOps, or Other.",
+              enum: "Skill type must be frontend, backend, database, dev-ops, or other.",
             },
           },
           skills: {
