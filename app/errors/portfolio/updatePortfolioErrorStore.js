@@ -97,10 +97,10 @@ module.exports = {
                 },
                 link: {
                   type: "string",
-                  minLength: 2,
+                  minLength: 1,
                   errorMessage: {
                     type: "Sub menu link must be a string",
-                    minLength: "Sub menu link must be at least 2 characters.",
+                    minLength: "Sub menu link must be at least 1 characters.",
                   },
                 },
                 iconName: {
@@ -242,23 +242,17 @@ module.exports = {
                 },
                 secondaryTechName: {
                   type: "string",
-                  minLength: 2,
                   maxLength: 25,
                   errorMessage: {
                     type: "Secondary tech name must be a string",
-                    minLength:
-                      "Secondary tech name must at least 2 characters.",
                     maxLength:
                       "Secondary tech name must at most 25 characters.",
                   },
                 },
                 secondaryTechIcon: {
                   type: "string",
-                  minLength: 10,
                   errorMessage: {
                     type: "Secondary tech icon must be a string",
-                    minLength:
-                      "Secondary tech icon must be at least 10 characters.",
                   },
                 },
                 knowledgeLevel: {
